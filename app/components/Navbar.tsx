@@ -1,49 +1,110 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-20 top-0 left-0">
+    <nav
+      className={`fixed w-full z-30 top-0 left-0 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-red-600">
-            Vasantham
+          <Link href="/" className="flex items-center">
+            <img
+              src={isScrolled ? "/logo1.png" : "/logo.png"}
+              alt="Vasantham Logo"
+              className={`object-contain transition-all duration-300 ${
+                isScrolled ? "w-20 h-20" : "w-28 h-28"
+              }`}
+            />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition">Home</Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600 transition">About</Link>
-            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition">Services</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition">Contact</Link>
+          <div className="hidden md:flex items-center space-x-10">
+            {[
+              { name: "Home", path: "/" },
+              { name: "Collections", path: "/collections" },
+              { name: "About", path: "/about" },
+              { name: "Gallery", path: "/gallery" },
+              { name: "Contact", path: "/contact" },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                className={`font-medium transition-colors duration-300 relative group ${
+                  isScrolled
+                    ? "text-gray-800 hover:text-red-700"
+                    : "text-white hover:text-red-400"
+                }`}
+              >
+                {item.name}
+                <span
+                  className={`absolute left-0 -bottom-1 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${
+                    isScrolled ? "bg-red-700" : "bg-white"
+                  }`}
+                ></span>
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none"
+            className={`md:hidden p-2 rounded-md transition-colors duration-300 ${
+              isScrolled ? "text-gray-800" : "text-white"
+            }`}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-4 py-3 space-y-2">
-            <Link href="/" className="block text-gray-700 hover:text-blue-600">Home</Link>
-            <Link href="/about" className="block text-gray-700 hover:text-blue-600">About</Link>
-            <Link href="/services" className="block text-gray-700 hover:text-blue-600">Services</Link>
-            <Link href="/contact" className="block text-gray-700 hover:text-blue-600">Contact</Link>
-          </div>
+      <div
+        className={`md:hidden transition-all duration-300 overflow-hidden ${
+          isOpen
+            ? isScrolled
+              ? "max-h-80 opacity-100 bg-white"
+              : "max-h-80 opacity-100 bg-black/80 backdrop-blur-md"
+            : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="px-6 py-4 space-y-3">
+          {[
+            { name: "Home", path: "/" },
+            { name: "Collections", path: "/collections" },
+            { name: "About", path: "/about" },
+            { name: "Gallery", path: "/gallery" },
+            { name: "Contact", path: "/contact" },
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.path}
+              onClick={() => setIsOpen(false)}
+              className={`block font-medium transition-colors duration-300 ${
+                isScrolled
+                  ? "text-gray-800 hover:text-red-700"
+                  : "text-white hover:text-red-400"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 };
