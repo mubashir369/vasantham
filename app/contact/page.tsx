@@ -1,124 +1,110 @@
-"use client";
-import { Mail, Phone, MapPin, Facebook, InstagramIcon, MessageCircle } from "lucide-react";
-import Link from "next/link";
 
-export default function ContactPage() {
+import { Playfair_Display } from "next/font/google";
+
+import Script from "next/script";
+import ClientLayout from "../ClientLayout";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+export const metadata = {
+  title: "Vasantham Wedding Castle | Premium Sarees & Textiles in Palakkad",
+  description:
+    "Vasantham Wedding Castle — Malabar’s finest textile and fashion destination in Palakkad. Explore silk sarees, bridal wear, designer fabrics, and ethnic collections crafted with elegance and tradition.",
+  keywords: [
+    "Vasantham Textiles",
+    "Vasantham Wedding Castle",
+    "Vasantham Sarees",
+    "Vasantham Silks",
+    "Vasantham Palakkad",
+    "Wedding Sarees Palakkad",
+    "Designer Sarees Kerala",
+    "Luxury Sarees Palakkad",
+    "Bridal Sarees Palakkad",
+    "Kerala Textiles",
+    "Vasantham Wedding Castle Palakkad",
+  ],
+  authors: [{ name: "Vasantham Wedding Castle" }],
+  openGraph: {
+    title: "Vasantham Wedding Castle | Malabar’s Finest Textile & Saree Collection",
+    description:
+      "Discover timeless elegance at Vasantham Wedding Castle — Palakkad’s most trusted name for sarees, wedding wear, and designer fabrics.",
+    url: "https://vasantham.co.in",
+    siteName: "Vasantham Wedding Castle",
+    images: [
+      {
+        url: "/og-image.jpg", // your OG image
+        width: 1200,
+        height: 630,
+        alt: "Vasantham Wedding Castle - Palakkad Textile & Saree Showroom",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vasantham Wedding Castle | Premium Sarees & Textiles in Palakkad",
+    description:
+      "Luxury silk sarees, bridal collections, and designer fabrics — experience the elegance of Vasantham Wedding Castle in Palakkad.",
+    images: ["/og-image.jpg"],
+  },
+  metadataBase: new URL("https://vasantham.co.in"),
+  alternates: {
+    canonical: "https://vasantham.co.in",
+  },
+  themeColor: "#7d0a0a",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-red-800 mb-3">
-          Contact Us
-        </h1>
-        <p className="text-gray-200 text-base md:text-lg bg-red-800 inline-block px-4 py-2 rounded-lg">
-          We'd love to hear from you! Get in touch for inquiries, custom orders, or appointments.
-        </p>
-      </div>
+    <html lang="en">
+      <body className={`${playfair.className} pt-20 bg-black text-white`}>
+        <ClientLayout>{children}</ClientLayout>
 
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* Left - Contact Info */}
-        <div className="space-y-6 text-gray-900">
-          <h2 className="text-2xl font-semibold text-red-700 uppercase">
-            Vasantham Wedding Castle
-          </h2>
-
-          <div className="space-y-4">
-            <p className="flex items-start gap-3">
-              <MapPin size={22} className="text-red-600 mt-1" />
-              <span className="leading-relaxed text-white">
-                Opposite KTM High School, Kozhikode Road, Palakkad, Kerala
-              </span>
-            </p>
-
-            <p className="flex items-center gap-3">
-              <Phone size={22} className="text-red-600" />
-              <span className="text-white">+91 8606360066</span>
-            </p>
-
-            <p className="flex items-center gap-3">
-              <Mail size={22} className="text-red-600" />
-              <span className="text-white">vasanthammkd@gmail.com</span>
-            </p>
-          </div>
-
-          {/* Social Links */}
-          <div className="pt-6">
-            <h3 className="text-lg font-medium text-red-700 mb-3">Follow us</h3>
-            <div className="flex gap-4">
-              <Link
-                href="https://www.facebook.com/vasanthamweddingcastle/"
-                target="_blank"
-                className="p-2 bg-gray-100 hover:bg-red-100 text-red-700 rounded-full transition"
-              >
-                <Facebook size={22} />
-              </Link>
-              <Link
-                href="https://www.instagram.com/vasanthamweddingcastle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-                target="_blank"
-                className="p-2 bg-gray-100 hover:bg-red-100 text-red-700 rounded-full transition"
-              >
-                <InstagramIcon size={22} />
-              </Link>
-              <Link
-                href="https://wa.me/918606360066"
-                target="_blank"
-                className="p-2 bg-gray-100 hover:bg-red-100 text-red-700 rounded-full transition"
-              >
-                <MessageCircle size={22} />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Right - Contact Form */}
-        <div className="bg-white shadow-lg rounded-2xl p-8 border border-red-100">
-          <h3 className="text-2xl font-semibold text-red-700 mb-6">Send Us a Message</h3>
-          <form className="space-y-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-800 mb-1">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-800 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-800 mb-1">
-                Message
-              </label>
-              <textarea
-                placeholder="Your Message"
-                rows={4}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-red-700 hover:bg-red-800 text-white font-semibold py-3 rounded-lg transition"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+        {/* 🧭 JSON-LD Structured Data for SEO */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Store",
+              name: "Vasantham Wedding Castle",
+              image: "https://vasanthamweddingcastle.com/og-image.jpg",
+              "@id": "https://vasanthamweddingcastle.com",
+              url: "https://vasanthamweddingcastle.com",
+              telephone: "+91 8606360066",
+              email: "vasanthammkd@gmail.com",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Opposite KTM High School, Kozhikode Road",
+                addressLocality: "Palakkad",
+                addressRegion: "Kerala",
+                postalCode: "678001",
+                addressCountry: "IN",
+              },
+              sameAs: [
+                "https://www.facebook.com/vasanthamweddingcastle/",
+                "https://www.instagram.com/vasanthamweddingcastle/",
+                "https://wa.me/918606360066",
+              ],
+              openingHours: "Mo-Su 09:00-21:00",
+              priceRange: "₹₹",
+              brand: {
+                "@type": "Brand",
+                name: "Vasantham Textiles",
+              },
+            }),
+          }}
+        />
+      </body>
+    </html>
   );
 }
