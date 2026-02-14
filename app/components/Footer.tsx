@@ -11,7 +11,7 @@ export default function Footer() {
           <h2 className="text-2xl font-bold mb-3 tracking-wide">VASANTHAM WEDDING CASTLE</h2>
           <p className="text-red-200 flex items-start gap-2 mb-2">
             <MapPin size={18} className="mt-1" />
-            OPPOSITE KTM HIGH SCHOOL, KOZHIKODE ROAD, PALAKKAD
+            OPPOSITE  MY G Future, KOZHIKODE ROAD, PALAKKAD , MANNARKKAD
           </p>
           <p className="text-red-200 flex items-center gap-2 mb-1">
             <Phone size={18} /> Ph: 8606360066

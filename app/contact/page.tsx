@@ -35,7 +35,7 @@ export const metadata = {
     siteName: "Vasantham Wedding Castle",
     images: [
       {
-        url: "/og-image.jpg", // your OG image
+        url: "/og-image.jpg", 
         width: 1200,
         height: 630,
         alt: "Vasantham Wedding Castle - Palakkad Textile & Saree Showroom",
